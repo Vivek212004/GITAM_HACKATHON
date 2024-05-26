@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container">
+    <nav class="navbar navbar-expand navbar-dark bg-dark" aria-label="Second navbar example">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Always expand</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse" id="navbarsExample02">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+          </ul>
+          <form role="search">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+          </form>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div class="container">
+    <div class="image1">
+      <div class="imaget">
+        <h1>About us</h1>
+       <h3>Our website provides Assistance, Aptitude and AI-ML (Artificial Intelligence-Machine Learning)</h3>
+      </div>
+      <div class="imaget1">
+        <h1>To see the latest articles </h1>
+        <h4><a href="">Click Here</a></h4>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <h2>Enter a paragraph to generate questions and answers:</h2>
+    <form id="paragraphForm" method="POST" action="/process">
+      <textarea name="paragraph" id="paragraph" rows="10" class="form-control" placeholder="Enter your paragraph here"></textarea>
+      <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    </form>
+    <div id="result" class="mt-5"></div>
+  </div>
+  <div class="m5">
+    <div class="container">
+      <div class="footer">
+        <div class="cu">
+          <h1>Contact Us</h1>
+          <p>email</p>
+          <p>number</p>
+        </div>
+        <div class="ql">
+          <h1>Quick Links</h1>
+          <p>home </p>
+          <p>about us</p>
+          <p>registration</p>
+        </div>
+        <div class="mi">
+          <h1>More Info:</h1>
+          <p>privacy policy</p>
+          <p>terms of service</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('paragraphForm').onsubmit = async function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const response = await fetch(this.action, {
+        method: 'POST',
+        body: formData
+      });
+      const result = await response.text();
+      document.getElementById('result').innerHTML = result;
+    };
+  </script>
+</body>
+</html>
